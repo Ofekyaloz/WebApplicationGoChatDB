@@ -8,19 +8,29 @@
 
   <ItemGroup>
     <Compile Remove="Migrations\**" />
+    <Compile Remove="Views\Chats\**" />
+    <Compile Remove="Views\Contacts\**" />
     <Compile Remove="Views\Home\**" />
     <Content Remove="Migrations\**" />
+    <Content Remove="Views\Chats\**" />
+    <Content Remove="Views\Contacts\**" />
     <Content Remove="Views\Home\**" />
     <EmbeddedResource Remove="Migrations\**" />
+    <EmbeddedResource Remove="Views\Chats\**" />
+    <EmbeddedResource Remove="Views\Contacts\**" />
     <EmbeddedResource Remove="Views\Home\**" />
     <None Remove="Migrations\**" />
+    <None Remove="Views\Chats\**" />
+    <None Remove="Views\Contacts\**" />
     <None Remove="Views\Home\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\ChatsController.cs" />
     <Compile Remove="Controllers\HomeController.cs" />
     <Compile Remove="Controllers\Users2Controller.cs" />
     <Compile Remove="Controllers\UsersController - Copy.cs" />
+    <Compile Remove="Models\Chat.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -16,8 +16,6 @@ namespace WebApi.Models
         public string Nickname { get; set; }
         [Required]
         public string Photo { get; set; }
-        public List<Chat> Chats { get; set; }
-
-
+        public List<Contact> Contacts { get; set; }
     }
 }

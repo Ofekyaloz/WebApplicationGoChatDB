@@ -5,9 +5,9 @@ namespace WebApplicationGoChat.Models
     public class Contact
     {
         [Key]
-        public string Username { get; set; }
+        public int Id { get; set; }
         [Required]
-        public string Nickname { get; set; }
-        public string Photo { get; set; }
+        public string Username { get; set; }
+        public List<Message> Messages { get; set; }
     }
 }

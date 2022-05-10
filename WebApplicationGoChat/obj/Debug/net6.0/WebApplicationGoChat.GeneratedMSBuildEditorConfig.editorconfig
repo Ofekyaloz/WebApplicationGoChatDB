@@ -15,46 +15,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\gilig\source\repos\WebApplicationGoChat\WebApplicationGoChat
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/gilig/source/repos/WebApplicationGoChat/WebApplicationGoChat/Views/Chats/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdHNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/gilig/source/repos/WebApplicationGoChat/WebApplicationGoChat/Views/Chats/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdHNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/gilig/source/repos/WebApplicationGoChat/WebApplicationGoChat/Views/Chats/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdHNcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/gilig/source/repos/WebApplicationGoChat/WebApplicationGoChat/Views/Chats/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdHNcRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/gilig/source/repos/WebApplicationGoChat/WebApplicationGoChat/Views/Chats/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdHNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/gilig/source/repos/WebApplicationGoChat/WebApplicationGoChat/Views/Contacts/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdHNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/gilig/source/repos/WebApplicationGoChat/WebApplicationGoChat/Views/Contacts/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdHNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/gilig/source/repos/WebApplicationGoChat/WebApplicationGoChat/Views/Contacts/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdHNcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/gilig/source/repos/WebApplicationGoChat/WebApplicationGoChat/Views/Contacts/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdHNcRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/gilig/source/repos/WebApplicationGoChat/WebApplicationGoChat/Views/Contacts/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdHNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/gilig/source/repos/WebApplicationGoChat/WebApplicationGoChat/Views/Messages/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVzc2FnZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

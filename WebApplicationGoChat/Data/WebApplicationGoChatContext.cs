@@ -21,7 +21,5 @@ namespace WebApplicationGoChat.Data
         public DbSet<Contact> Contact { get; set; }
 
         public DbSet<Message> Message { get; set; }
-
-        public DbSet<Chat> Chat { get; set; }
     }
 }
