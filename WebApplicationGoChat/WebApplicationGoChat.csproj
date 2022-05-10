@@ -7,6 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\**" />
+    <Compile Remove="Views\Home\**" />
+    <Content Remove="Migrations\**" />
+    <Content Remove="Views\Home\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <EmbeddedResource Remove="Views\Home\**" />
+    <None Remove="Migrations\**" />
+    <None Remove="Views\Home\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\HomeController.cs" />
+    <Compile Remove="Controllers\Users2Controller.cs" />
+    <Compile Remove="Controllers\UsersController - Copy.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 

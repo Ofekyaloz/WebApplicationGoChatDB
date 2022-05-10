@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WebApplicationGoChat.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<WebApplicationGoChatContext>(options =>
@@ -8,6 +10,20 @@ builder.Services.AddDbContext<WebApplicationGoChatContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(1);
+});
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+})
+.AddCookie(options =>
+  {
+      options.LoginPath = "/Users/Login/";
+  });
 
 var app = builder.Build();
 
@@ -20,10 +36,14 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseSession();
+
+app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Users}/{action=Index}/{id?}");
+    pattern: "{controller=Users}/{action=Login}/{id?}");
 
 app.Run();

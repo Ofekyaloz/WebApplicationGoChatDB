@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,9 @@ using WebApplicationGoChat.Models;
 
 namespace WebApplicationGoChat.Controllers
 {
+    [Authorize]
+    [ApiController]
+    [Route("api/contacts/{id}/[controller]")]
     public class MessagesController : Controller
     {
         private readonly WebApplicationGoChatContext _context;
@@ -20,22 +24,22 @@ namespace WebApplicationGoChat.Controllers
             _context = context;
         }
 
-        // GET: Messages
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Message.ToListAsync());
         }
 
-        // GET: Messages/Details/5
-        public async Task<IActionResult> Details(int? id)
+        [HttpGet("{id2}")]
+        public async Task<IActionResult> Details(int? id2)
         {
-            if (id == null)
+            if (id2 == null)
             {
                 return NotFound();
             }
 
             var message = await _context.Message
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == id2);
             if (message == null)
             {
                 return NotFound();
@@ -50,9 +54,6 @@ namespace WebApplicationGoChat.Controllers
             return View();
         }
 
-        // POST: Messages/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Content,Date,sender")] Message message)
@@ -82,14 +83,11 @@ namespace WebApplicationGoChat.Controllers
             return View(message);
         }
 
-        // POST: Messages/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPut("{id2}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Content,Date,sender")] Message message)
+        public async Task<IActionResult> Edit(int id2, [Bind("Id,Content,Date,sender")] Message message)
         {
-            if (id != message.Id)
+            if (id2 != message.Id)
             {
                 return NotFound();
             }
@@ -135,12 +133,11 @@ namespace WebApplicationGoChat.Controllers
             return View(message);
         }
 
-        // POST: Messages/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpDelete("{id2}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id2)
         {
-            var message = await _context.Message.FindAsync(id);
+            var message = await _context.Message.FindAsync(id2);
             _context.Message.Remove(message);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

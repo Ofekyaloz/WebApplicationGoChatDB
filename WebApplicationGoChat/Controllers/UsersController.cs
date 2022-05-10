@@ -2,10 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WebApi.Models;
 using WebApplicationGoChat.Data;
 using WebApplicationGoChat.Models;
 
@@ -15,37 +19,15 @@ namespace WebApplicationGoChat.Controllers
     {
         private readonly WebApplicationGoChatContext _context;
 
+        public string CookieAuthentication { get; private set; }
+
         public UsersController(WebApplicationGoChatContext context)
         {
             _context = context;
         }
 
-        // GET: Users
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.User.ToListAsync());
-        }
-
-        // GET: Users/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.User
-                .FirstOrDefaultAsync(m => m.Username == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View(user);
-        }
-
         // GET: Users/Create
-        public IActionResult Create()
+        public IActionResult Register()
         {
             return View();
         }
@@ -55,100 +37,84 @@ namespace WebApplicationGoChat.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Username,Password,Email")] User user)
+        public async Task<IActionResult> Register([Bind("Username,Password,Nickname,Email,Photo")] User user)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var q = from u in _context.User
+                        where u.Username == user.Username
+                        select u;
+
+                if (q.Count() > 0)
+                {
+                    ViewData["Error"] = "This user is already exists!";
+                }
+
+                else
+                {
+                    SignIn(user);
+                    _context.Add(user);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index), "Contacts");
+                }
             }
-            return View(user);
+            return RedirectToAction("Index", "Contacts");
         }
 
-        // GET: Users/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        // GET: Users/Create
+        public IActionResult Login()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return View(user);
+            return View();
         }
 
-        // POST: Users/Edit/5
+        // POST: Users/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Username,Password,Email")] User user)
+        public async Task<IActionResult> Login([Bind("Username,Password")] User user)
         {
-            if (id != user.Username)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
+                var q = from u in _context.User
+                        where u.Username == user.Username && u.Password == user.Password
+                        select u;
+
+                if (q.Count() > 0)
                 {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
+                    SignIn(q.First());
+                    return RedirectToAction(nameof(Index), "Contacts");
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!UserExists(user.Username))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    ViewData["Error"] = "Username and/or password are wrong!";
                 }
-                return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return RedirectToAction("Login", "Users");
         }
 
-        // GET: Users/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async void Logout()
         {
-            if (id == null)
+            HttpContext.SignOutAsync();
+        }
+
+        private async void SignIn(User user)
+        {
+            var claims = new List<Claim>
             {
-                return NotFound();
-            }
+                new Claim(ClaimTypes.Name, user.Username),
+            };
 
-            var user = await _context.User
-                .FirstOrDefaultAsync(m => m.Username == id);
-            if (user == null)
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var authProperties = new AuthenticationProperties
             {
-                return NotFound();
-            }
+                //ExpiredUtc = DateTimeOffset.UtcNow.AddMinutes(10)
+            };
 
-            return View(user);
-        }
-
-        // POST: Users/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            var user = await _context.User.FindAsync(id);
-            _context.User.Remove(user);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool UserExists(string id)
-        {
-            return _context.User.Any(e => e.Username == id);
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties);
         }
     }
 }
