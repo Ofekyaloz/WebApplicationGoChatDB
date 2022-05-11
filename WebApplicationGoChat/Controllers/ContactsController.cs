@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,6 @@ namespace WebApplicationGoChat.Controllers
     public class ContactsController : Controller
     {
         private readonly WebApplicationGoChatContext _context;
-
         public ContactsController(WebApplicationGoChatContext context)
         {
             _context = context;
@@ -27,23 +27,18 @@ namespace WebApplicationGoChat.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetString("username") == null)
-            {
-                return RedirectToAction("Login", "Users");
-            }
-            return View(await _context.Contact.ToListAsync());
+            var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+            return Json(UsersController._users.Find(m => m.Username == userId).Contacts);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Details(string id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
 
-            var contact = await _context.Contact
-                .FirstOrDefaultAsync(m => m.Username == id);
+            List<Contact> contacts = UsersController._users.Find(m => m.Username == userId).Contacts;
+            var contact = contacts.Find(m => m.id == id);
+
             if (contact == null)
             {
                 return NotFound();
@@ -60,7 +55,7 @@ namespace WebApplicationGoChat.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Username,Nickname,Photo")] Contact contact)
+        public async Task<IActionResult> Create([Bind("id,name,server,last,lastdate")] Contact contact)
         {
             if (ModelState.IsValid)
             {
@@ -89,9 +84,9 @@ namespace WebApplicationGoChat.Controllers
 
         [HttpPut("{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Username,Nickname,Photo")] Contact contact)
+        public async Task<IActionResult> Edit(string id, [Bind("id,name,server,last,lastdate")] Contact contact)
         {
-            if (id != contact.Username)
+            if (id != contact.id)
             {
                 return NotFound();
             }
@@ -105,7 +100,7 @@ namespace WebApplicationGoChat.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ContactExists(contact.Username))
+                    if (!ContactExists(contact.id))
                     {
                         return NotFound();
                     }
@@ -128,7 +123,7 @@ namespace WebApplicationGoChat.Controllers
             }
 
             var contact = await _context.Contact
-                .FirstOrDefaultAsync(m => m.Username == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (contact == null)
             {
                 return NotFound();
@@ -148,7 +143,7 @@ namespace WebApplicationGoChat.Controllers
 
         private bool ContactExists(string id)
         {
-            return _context.Contact.Any(e => e.Username == id);
+            return _context.Contact.Any(e => e.id == id);
         }
     }
 }

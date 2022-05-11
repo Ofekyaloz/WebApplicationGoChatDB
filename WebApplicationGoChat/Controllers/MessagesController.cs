@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,27 +26,34 @@ namespace WebApplicationGoChat.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string id)
         {
-            return View(await _context.Message.ToListAsync());
+            var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+            Dictionary<string, List<Message>> dict = UsersController._users.Find(m => m.Username == userId).Messages;
+            List<Message> messages = dict[id];
+
+            return Json(messages);
         }
 
         [HttpGet("{id2}")]
-        public async Task<IActionResult> Details(int? id2)
+        public async Task<IActionResult> Details(string id, int? id2)
         {
             if (id2 == null)
             {
                 return NotFound();
             }
 
-            var message = await _context.Message
-                .FirstOrDefaultAsync(m => m.Id == id2);
+            var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+            Dictionary<string, List<Message>> dict = UsersController._users.Find(m => m.Username == userId).Messages;
+            List<Message> messages = dict[id];
+            Message message = messages.Find(m => m.id == id2);
+
             if (message == null)
             {
                 return NotFound();
             }
 
-            return View(message);
+            return Json(message);
         }
 
         // GET: Messages/Create
@@ -56,7 +64,7 @@ namespace WebApplicationGoChat.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Content,Date,sender")] Message message)
+        public async Task<IActionResult> Create([Bind("id,content,created,sent")] Message message)
         {
             if (ModelState.IsValid)
             {
@@ -85,9 +93,9 @@ namespace WebApplicationGoChat.Controllers
 
         [HttpPut("{id2}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id2, [Bind("Id,Content,Date,sender")] Message message)
+        public async Task<IActionResult> Edit(int id2, [Bind("id,content,created,sent")] Message message)
         {
-            if (id2 != message.Id)
+            if (id2 != message.id)
             {
                 return NotFound();
             }
@@ -101,7 +109,7 @@ namespace WebApplicationGoChat.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MessageExists(message.Id))
+                    if (!MessageExists(message.id))
                     {
                         return NotFound();
                     }
@@ -124,7 +132,7 @@ namespace WebApplicationGoChat.Controllers
             }
 
             var message = await _context.Message
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (message == null)
             {
                 return NotFound();
@@ -145,7 +153,7 @@ namespace WebApplicationGoChat.Controllers
 
         private bool MessageExists(int id)
         {
-            return _context.Message.Any(e => e.Id == id);
+            return _context.Message.Any(e => e.id == id);
         }
     }
 }

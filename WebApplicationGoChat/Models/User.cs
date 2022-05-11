@@ -17,5 +17,7 @@ namespace WebApi.Models
         [Required]
         public string Photo { get; set; }
         public List<Contact> Contacts { get; set; }
+        public Dictionary<string, List<Message>> Messages { get; set; }
     }
+
 }

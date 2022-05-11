@@ -30,6 +30,7 @@
     <Compile Remove="Controllers\HomeController.cs" />
     <Compile Remove="Controllers\Users2Controller.cs" />
     <Compile Remove="Controllers\UsersController - Copy.cs" />
+    <Compile Remove="Controllers\_users1.cs" />
     <Compile Remove="Models\Chat.cs" />
   </ItemGroup>
 
