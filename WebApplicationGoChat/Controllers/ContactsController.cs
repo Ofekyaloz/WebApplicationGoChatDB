@@ -37,7 +37,7 @@ namespace WebApplicationGoChat.Controllers
             var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
 
             List<Contact> contacts = UsersController._users.Find(m => m.Username == userId).Contacts;
-            var contact = contacts.Find(m => m.id == id);
+            Contact contact = contacts.Find(m => m.id == id);
 
             if (contact == null)
             {
@@ -55,15 +55,14 @@ namespace WebApplicationGoChat.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,name,server,last,lastdate")] Contact contact)
+        public async Task<IActionResult> Create([Bind("id,name,server")] Contact contact)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(contact);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return Json(contact);
+            var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+            List<Contact> contacts = UsersController._users.Find(m => m.Username == userId).Contacts;
+
+            contacts.Add(contact);
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Contacts/Edit/5
@@ -84,34 +83,22 @@ namespace WebApplicationGoChat.Controllers
 
         [HttpPut("{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("id,name,server,last,lastdate")] Contact contact)
+        public async Task<IActionResult> Edit(string id, [Bind("name,server")] Contact contact)
         {
             if (id != contact.id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(contact);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ContactExists(contact.id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return Json(contact);
+            var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+
+            List<Contact> contacts = UsersController._users.Find(m => m.Username == userId).Contacts;
+            Contact x = contacts.Find(m => m.id == id);
+
+            x.server = contact.server;
+            x.name = contact.name;
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Contacts/Delete/5
@@ -135,15 +122,11 @@ namespace WebApplicationGoChat.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var contact = await _context.Contact.FindAsync(id);
-            _context.Contact.Remove(contact);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+            List<Contact> contacts = UsersController._users.Find(m => m.Username == userId).Contacts;
+            contacts.Remove(contacts.Find(m => m.id == id));
 
-        private bool ContactExists(string id)
-        {
-            return _context.Contact.Any(e => e.id == id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

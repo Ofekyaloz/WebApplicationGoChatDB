@@ -64,14 +64,16 @@ namespace WebApplicationGoChat.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,content,created,sent")] Message message)
+        public async Task<IActionResult> Create(string id, [Bind("content")] Message message)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(message);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+            var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+            Dictionary<string, List<Message>> dict = UsersController._users.Find(m => m.Username == userId).Messages;
+            List<Message> messages = dict[id];
+
+            message.created = DateTime.Now.ToString();
+            message.sent = true;
+
+            messages.Add(message);
             return View(message);
         }
 
@@ -93,34 +95,21 @@ namespace WebApplicationGoChat.Controllers
 
         [HttpPut("{id2}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id2, [Bind("id,content,created,sent")] Message message)
+        public async Task<IActionResult> Edit(string id, int id2, [Bind("content")] Message message)
         {
             if (id2 != message.id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(message);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MessageExists(message.id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(message);
+            var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+            Dictionary<string, List<Message>> dict = UsersController._users.Find(m => m.Username == userId).Messages;
+            List<Message> messages = dict[id];
+
+            Message m = messages[id2];
+            m.content = message.content;
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Messages/Delete/5
@@ -143,17 +132,14 @@ namespace WebApplicationGoChat.Controllers
 
         [HttpDelete("{id2}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id2)
+        public async Task<IActionResult> DeleteConfirmed(string id, int id2)
         {
-            var message = await _context.Message.FindAsync(id2);
-            _context.Message.Remove(message);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+            Dictionary<string, List<Message>> dict = UsersController._users.Find(m => m.Username == userId).Messages;
+            List<Message> messages = dict[id];
+            messages.Remove(messages.Find(m => m.id == id2));
 
-        private bool MessageExists(int id)
-        {
-            return _context.Message.Any(e => e.id == id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

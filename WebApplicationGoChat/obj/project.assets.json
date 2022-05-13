@@ -9657,11 +9657,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gilig\\source\\repos\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj",
+      "projectUniqueName": "C:\\Users\\gilig\\WebstormProjects\\GO-Chat\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj",
       "projectName": "WebApplicationGoChat",
-      "projectPath": "C:\\Users\\gilig\\source\\repos\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj",
+      "projectPath": "C:\\Users\\gilig\\WebstormProjects\\GO-Chat\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj",
       "packagesPath": "C:\\Users\\gilig\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gilig\\source\\repos\\WebApplicationGoChat\\WebApplicationGoChat\\obj\\",
+      "outputPath": "C:\\Users\\gilig\\WebstormProjects\\GO-Chat\\WebApplicationGoChat\\WebApplicationGoChat\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\gilig\\AppData\\Roaming\\NuGet\\NuGet.Config",

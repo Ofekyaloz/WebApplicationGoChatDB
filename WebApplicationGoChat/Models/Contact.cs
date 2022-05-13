@@ -10,7 +10,7 @@ namespace WebApplicationGoChat.Models
         public string name { get; set; }
         [Required]
         public string server { get; set; }
-        public string last { get; set; }
-        public string lastdate { get; set; }
+        public string? last { get; set; }
+        public string? lastdate { get; set; }
     }
 }

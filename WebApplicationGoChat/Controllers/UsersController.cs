@@ -54,15 +54,12 @@ namespace WebApplicationGoChat.Controllers
             // _context = context;
         }
 
-        // GET: Users/Create
+        // Register page
         public IActionResult Register()
         {
             return View();
         }
 
-        // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register([Bind("Username,Password,Nickname,Email,Photo")] User user)
@@ -80,20 +77,17 @@ namespace WebApplicationGoChat.Controllers
             {
                 SignIn(user);
                 _users.Add(user);
-                return RedirectToAction("api/{Contacts}");
+                return Ok();
             }
-            return RedirectToAction("Register", "Users");
+            return NotFound();
         }
 
-        // GET: Users/Create
+        // Login page
         public IActionResult Login()
         {
             return View();
         }
 
-        // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([Bind("Username,Password")] User user)
@@ -111,7 +105,7 @@ namespace WebApplicationGoChat.Controllers
             {
                 ViewData["Error"] = "Username and/or password are wrong!";
             }
-            return RedirectToAction("Login", "Users");
+            return Ok();
         }
 
         public async void Logout()
