@@ -54,6 +54,20 @@ namespace WebApplicationGoChat.Controllers
             // _context = context;
         }
 
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Details(string id)
+        {
+            User user = _users.Find(m => m.Username == id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Json(user);
+        }
+
         // Register page
         public IActionResult Register()
         {
