@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\WebApplicationGoChat"
+    "\\WebApplicationGoChat",
+    "\\WebApplicationGoChat\\Controllers"
   ],
-  "SelectedNode": "\\WebApplicationGoChat\\Program.cs",
+  "SelectedNode": "\\WebApplicationGoChat\\Controllers\\UsersController.cs",
   "PreviewInSolutionExplorer": false
 }
