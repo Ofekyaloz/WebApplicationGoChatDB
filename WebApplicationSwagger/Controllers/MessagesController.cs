@@ -1,13 +1,7 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using WebApplicationGoChat.Data;
 using WebApplicationGoChat.Models;
 using WebApplicationGoChat.Services;
 
@@ -53,29 +47,19 @@ namespace WebApplicationGoChat.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(string id, [Bind("content")] Message message)
+        public async Task<IActionResult> Create(string id, [Bind("content")] string content)
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
-
-            message.created = DateTime.Now.ToString();
-            message.sent = true;
-
-            _context.addMessage(userId, id, message);
+            _context.addMessage(userId, id, content);
             return Ok();
         }
 
         [HttpPut("{id2}")]
-        public async Task<IActionResult> Edit(string id, int id2, [Bind("content")] Message message)
+        public async Task<IActionResult> Edit(string id, int id2, [Bind("content")] string content)
         {
-            if (id2 != message.id)
-            {
-                return NotFound();
-            }
-
             var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
 
-            _context.editMessage(userId, id, message);
-
+            _context.editMessage(userId, id, id2, content);
             return Ok();
         }
 

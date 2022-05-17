@@ -79,22 +79,23 @@ namespace WebApplicationGoChat.Services
             return contact;
         }
 
-        public void addContact(string username, Contact contact)
+        public void addContact(string username, AddContactFields contactFields)
         {
             User user = getUser(username);
-            contact.Messages = new List<Message>();
+            Contact contact = new Contact() { id = contactFields.id, name = contactFields.name, server = contactFields.server,
+                Messages = new List<Message>(), lastdate = null, last = null };
             user.Contacts.Add(contact);
         }
 
-        public void editContact(string username, Contact contact)
+        public void editContact(string username, string id, UpdateContactFields contactFields)
         {
-            Contact x = getContact(username, contact.id);
+            Contact x = getContact(username, id);
             if (x == null)
             {
                 return;
             }
-            x.server = contact.server;
-            x.name = contact.name;
+            x.server = contactFields.server;
+            x.name = contactFields.name;
         }
 
         public void removeContact(string username, string contactname)
@@ -134,7 +135,7 @@ namespace WebApplicationGoChat.Services
             return message;
         }
 
-        public void addMessage(string username, string contactname, Message message)
+        public void addMessage(string username, string contactname, string content)
         {
             Contact contact = getContact(username, contactname);
             if (contact == null)
@@ -142,10 +143,11 @@ namespace WebApplicationGoChat.Services
                 return;
             }
 
+            Message message = new Message() { sent = true, created = DateTime.Now.ToString(), content = content, id = contact.Messages.Max(m => m.id) + 1 };
             contact.Messages.Add(message);
         }
 
-        public void editMessage(string username, string contactname, Message message)
+        public void editMessage(string username, string contactname, int id, string content)
         {
             Contact contact = getContact(username, contactname);
             if (contact == null)
@@ -153,11 +155,11 @@ namespace WebApplicationGoChat.Services
                 return;
             }
 
-            Message m = contact.Messages.Find(m => m.id == message.id);
+            Message m = contact.Messages.Find(m => m.id == id);
 
             if (m != null)
             {
-                m.content = message.content;
+                m.content = content;
             }
         }
         public void removeMessage(string username, string contactname, int id)

@@ -36,7 +36,7 @@ namespace WebApplicationGoChat.Controllers
 
         [HttpPost]
         [Route("/api/Users/Register")]
-        public async Task<IActionResult> Register([Bind("Username,Password,Nickname,Email,Photo")] User user)
+        public async Task<IActionResult> Register([Bind("Username,Password,Nickname,Email,Photo,Contacts")] User user)
         {
             var q = from u in _context.getUsers()
                     where u.Username == user.Username
@@ -54,7 +54,7 @@ namespace WebApplicationGoChat.Controllers
                 return Ok();
             }
         }
-        public class loginFields
+        public class LoginFields
         {
             public string username { get; set; }
             public string password { get; set; }
@@ -62,7 +62,7 @@ namespace WebApplicationGoChat.Controllers
 
         [HttpPost]
         [Route("/api/Users/Login")]
-        public async Task<IActionResult> Login([Bind("username,password")] loginFields loginFields)
+        public async Task<IActionResult> Login([Bind("username,password")] LoginFields loginFields)
         {
             var q = from u in _context.getUsers()
                     where u.Username == loginFields.username && u.Password == loginFields.password
@@ -71,7 +71,7 @@ namespace WebApplicationGoChat.Controllers
             if (q.Count() > 0)
             {
                 SignIn(q.First());
-                return Ok();
+                return Ok(q.First());
             }
             else
             {

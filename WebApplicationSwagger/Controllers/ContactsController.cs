@@ -1,12 +1,7 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApplicationGoChat.Models;
 using WebApplicationGoChat.Services;
 
@@ -46,25 +41,20 @@ namespace WebApplicationGoChat.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("id,name,server")] Contact contact)
+        public async Task<IActionResult> Create([Bind("id,name,server")] AddContactFields contactFields)
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
-            _context.addContact(userId, contact);
+            _context.addContact(userId, contactFields);
             return Ok();
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Edit(string id, [Bind("name,server")] Contact contact)
+        public async Task<IActionResult> Edit(string id, [Bind("name,server")] UpdateContactFields contactFields)
         {
-            if (id != contact.id)
-            {
-                return NotFound();
-            }
-
             var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
-            _context.editContact(userId, contact);
+            _context.editContact(userId, id, contactFields);
 
-            return RedirectToAction(nameof(Index));
+            return Ok();
         }
 
         [HttpDelete("{id}")]
@@ -73,7 +63,7 @@ namespace WebApplicationGoChat.Controllers
             var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
             _context.removeContact(userId, id);
 
-            return RedirectToAction(nameof(Index));
+            return Ok();
         }
 
         public class Invitation
