@@ -54,13 +54,18 @@ namespace WebApplicationGoChat.Controllers
                 return Ok();
             }
         }
+        public class loginFields
+        {
+            public string username { get; set; }
+            public string password { get; set; }
+        }
 
         [HttpPost]
         [Route("/api/Users/Login")]
-        public async Task<IActionResult> Login([Bind("Username,Password")] User user)
+        public async Task<IActionResult> Login([Bind("username,password")] loginFields loginFields)
         {
             var q = from u in _context.getUsers()
-                    where u.Username == user.Username && u.Password == user.Password
+                    where u.Username == loginFields.username && u.Password == loginFields.password
                     select u;
 
             if (q.Count() > 0)

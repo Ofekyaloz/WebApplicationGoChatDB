@@ -85,7 +85,7 @@ namespace WebApplicationGoChat.Controllers
 
         [HttpPost]
         [Route("api/invitations")]
-        public async Task<IActionResult> Invitation([Bind("from,to,server")] Invitation invitation)
+        public async Task<IActionResult> Create([Bind("from,to,server")] Invitation invitation)
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
 
@@ -108,7 +108,7 @@ namespace WebApplicationGoChat.Controllers
 
         public async Task<IActionResult> Create([Bind("from,to,content")] string from, string to, string content)
         {
-
+            return Ok();
         }
 
     }
