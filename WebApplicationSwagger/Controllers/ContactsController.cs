@@ -79,17 +79,7 @@ namespace WebApplicationGoChat.Controllers
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
 
-            List<Contact> contacts = _context.getUsers().Find(m => m.Username == userId).Contacts;
-            Contact contact = contacts.Find(m => m.id == invitation.to);
-
-            if (contact != null)
-                return NotFound();
-
-            if (_context.getUsers().Find(m => m.Username == invitation.from) == null)
-                return NotFound();
-
-            contacts.Add(new Contact() { server = invitation.server, Messages = new List<Message>(), lastdate = null, last = null, name = invitation.from });
-
+            _context.addContact(userId, new AddContactFields() { id = invitation.from, server = invitation.server, name = _context.getUsers().Find(m => m.Username == invitation.from).Nickname });
             return Ok();
         }
 

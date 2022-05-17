@@ -81,10 +81,18 @@ namespace WebApplicationGoChat.Services
 
         public void addContact(string username, AddContactFields contactFields)
         {
-            User user = getUser(username);
+            List<Contact> contacts = getUser(username).Contacts;
+
+            if (contacts.Find(m => m.id == contactFields.id) != null)
+                return;
+
+            if (getUsers().Find(m => m.Username == contactFields.id) == null)
+                return;
+            
             Contact contact = new Contact() { id = contactFields.id, name = contactFields.name, server = contactFields.server,
                 Messages = new List<Message>(), lastdate = null, last = null };
-            user.Contacts.Add(contact);
+
+            contacts.Add(contact);
         }
 
         public void editContact(string username, string id, UpdateContactFields contactFields)
