@@ -155,7 +155,7 @@ namespace WebApplicationGoChat.Services
 
             Message m = contact.Messages.Find(m => m.id == message.id);
 
-            if (m == null)
+            if (m != null)
             {
                 m.content = message.content;
             }

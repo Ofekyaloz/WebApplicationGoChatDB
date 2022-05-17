@@ -53,7 +53,6 @@ namespace WebApplicationGoChat.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string id, [Bind("content")] Message message)
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
@@ -66,7 +65,6 @@ namespace WebApplicationGoChat.Controllers
         }
 
         [HttpPut("{id2}")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, int id2, [Bind("content")] Message message)
         {
             if (id2 != message.id)
@@ -75,7 +73,6 @@ namespace WebApplicationGoChat.Controllers
             }
 
             var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
-            message.id = id2;
 
             _context.editMessage(userId, id, message);
 
@@ -83,7 +80,6 @@ namespace WebApplicationGoChat.Controllers
         }
 
         [HttpDelete("{id2}")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id, int id2)
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;

@@ -46,7 +46,6 @@ namespace WebApplicationGoChat.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,name,server")] Contact contact)
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
@@ -55,7 +54,6 @@ namespace WebApplicationGoChat.Controllers
         }
 
         [HttpPut("{id}")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("name,server")] Contact contact)
         {
             if (id != contact.id)
@@ -77,5 +75,41 @@ namespace WebApplicationGoChat.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public class Invitation
+        {
+            public string from { get; set; }
+            public string to { get; set; }
+            public string server { get; set; }
+        }
+
+        [HttpPost]
+        [Route("api/invitations")]
+        public async Task<IActionResult> Invitation([Bind("from,to,server")] Invitation invitation)
+        {
+            var userId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+
+            List<Contact> contacts = _context.getUsers().Find(m => m.Username == userId).Contacts;
+            Contact contact = contacts.Find(m => m.id == invitation.to);
+
+            if (contact != null)
+                return NotFound();
+
+            if (_context.getUsers().Find(m => m.Username == invitation.from) == null)
+                return NotFound();
+
+            contacts.Add(new Contact() { server = invitation.server, Messages = new List<Message>(), lastdate = null, last = null, name = invitation.from });
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("api/transfer")]
+
+        public async Task<IActionResult> Create([Bind("from,to,content")] string from, string to, string content)
+        {
+
+        }
+
     }
 }
