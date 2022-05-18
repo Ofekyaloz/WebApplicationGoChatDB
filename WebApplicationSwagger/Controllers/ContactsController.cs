@@ -83,13 +83,19 @@ namespace WebApplicationGoChat.Controllers
             return Ok();
         }
 
-        [HttpPost]
-        [Route("api/transfer")]
-
-        public async Task<IActionResult> Create([Bind("from,to,content")] string from, string to, string content)
+        public class Transfer
         {
-            return Ok();
+            public string from { get; set; }
+            public string to { get; set; }
+            public string content { get; set; }
         }
 
+        [HttpPost]
+        [Route("api/transfer")]
+        public async Task<IActionResult> Create([Bind("from,to,content")] Transfer transfer)
+        {
+            _context.addMessage(transfer.to, transfer.from, transfer.content);
+            return Ok();
+        }
     }
 }
