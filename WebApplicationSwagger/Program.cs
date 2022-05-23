@@ -10,7 +10,10 @@ builder.Services.AddSingleton<IWebService, WebService>();
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(2);
+    options.Cookie.IsEssential = true;
+    options.Cookie.HttpOnly = false;
+    options.Cookie.SameSite = SameSiteMode.None;
+    options.IdleTimeout = TimeSpan.FromSeconds(60);
 });
 
 builder.Services.AddAuthentication(options =>
@@ -29,14 +32,12 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("Allow All",
-        builder =>
+    options.AddDefaultPolicy(
+        policy =>
         {
-            builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            policy.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
         });
 });
-
-builder.Services.AddSingleton<IWebService, WebService>();
 
 var app = builder.Build();
 
@@ -45,25 +46,21 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseHsts();
 }
 
-app.UseCors("Allow All");
+app.UseCors();
 
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseCookiePolicy();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseSession();
-
-app.UseAuthentication();
-
-app.UseAuthorization();
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
 
 app.MapControllers();
 

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gilig\\source\\repos\\WebApplicationGoChat\\WebApplicationSwagger\\WebApplicationSwagger.csproj": {}
+    "C:\\Users\\ofek1\\Source\\Repos\\giligutfeld\\WebApplicationGoChat\\WebApplicationSwagger\\WebApplicationSwagger.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gilig\\source\\repos\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj": {
+    "C:\\Users\\ofek1\\Source\\Repos\\giligutfeld\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gilig\\source\\repos\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj",
+        "projectUniqueName": "C:\\Users\\ofek1\\Source\\Repos\\giligutfeld\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj",
         "projectName": "WebApplicationGoChat",
-        "projectPath": "C:\\Users\\gilig\\source\\repos\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj",
-        "packagesPath": "C:\\Users\\gilig\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gilig\\source\\repos\\WebApplicationGoChat\\WebApplicationGoChat\\obj\\",
+        "projectPath": "C:\\Users\\ofek1\\Source\\Repos\\giligutfeld\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj",
+        "packagesPath": "C:\\Users\\ofek1\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ofek1\\Source\\Repos\\giligutfeld\\WebApplicationGoChat\\WebApplicationGoChat\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\gilig\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ofek1\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[6.0.5, )"
@@ -81,21 +85,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\gilig\\source\\repos\\WebApplicationGoChat\\WebApplicationSwagger\\WebApplicationSwagger.csproj": {
+    "C:\\Users\\ofek1\\Source\\Repos\\giligutfeld\\WebApplicationGoChat\\WebApplicationSwagger\\WebApplicationSwagger.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gilig\\source\\repos\\WebApplicationGoChat\\WebApplicationSwagger\\WebApplicationSwagger.csproj",
+        "projectUniqueName": "C:\\Users\\ofek1\\Source\\Repos\\giligutfeld\\WebApplicationGoChat\\WebApplicationSwagger\\WebApplicationSwagger.csproj",
         "projectName": "WebApplicationSwagger",
-        "projectPath": "C:\\Users\\gilig\\source\\repos\\WebApplicationGoChat\\WebApplicationSwagger\\WebApplicationSwagger.csproj",
-        "packagesPath": "C:\\Users\\gilig\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gilig\\source\\repos\\WebApplicationGoChat\\WebApplicationSwagger\\obj\\",
+        "projectPath": "C:\\Users\\ofek1\\Source\\Repos\\giligutfeld\\WebApplicationGoChat\\WebApplicationSwagger\\WebApplicationSwagger.csproj",
+        "packagesPath": "C:\\Users\\ofek1\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ofek1\\Source\\Repos\\giligutfeld\\WebApplicationGoChat\\WebApplicationSwagger\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\gilig\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ofek1\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -109,8 +113,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\gilig\\source\\repos\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj": {
-                "projectPath": "C:\\Users\\gilig\\source\\repos\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj"
+              "C:\\Users\\ofek1\\Source\\Repos\\giligutfeld\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj": {
+                "projectPath": "C:\\Users\\ofek1\\Source\\Repos\\giligutfeld\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj"
               }
             }
           }
@@ -148,7 +152,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -91,7 +91,8 @@ namespace WebApplicationGoChat.Controllers
                 new Claim(ClaimTypes.Name, user.Username),
             };
 
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var claimsIdentity = new ClaimsIdentity(
+                claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var authProperties = new AuthenticationProperties
             {
                 //ExpiredUtc = DateTimeOffset.UtcNow.AddMinutes(10)
