@@ -49,7 +49,9 @@ namespace WebApplicationGoChat.Controllers
             return Ok();
         }
 
+
         [HttpPut("{id}")]
+        
         public async Task<IActionResult> Edit(string id, [Bind("name,server")] UpdateContactFields contactFields)
         {
             var userId = HttpContext.User.Claims.First(i => i.Type == "UserId").Value;
@@ -65,38 +67,6 @@ namespace WebApplicationGoChat.Controllers
             _context.removeContact(userId, id);
 
             return Ok();
-        }
-
-        public class Invitation
-        {
-            public string from { get; set; }
-            public string to { get; set; }
-            public string server { get; set; }
-        }
-
-        [HttpPost]
-        [Route("api/invitations")]
-        public async Task<IActionResult> Create([Bind("from,to,server")] Invitation invitation)
-        {
-            var userId = HttpContext.User.Claims.First(i => i.Type == "UserId").Value;
-
-            _context.addContact(userId, new AddContactFields() { id = invitation.from, server = invitation.server, name = _context.getUsers().Find(m => m.Username == invitation.from).Nickname });
-            return Ok();
-        }
-
-        public class Transfer
-        {
-            public string from { get; set; }
-            public string to { get; set; }
-            public string content { get; set; }
-        }
-
-        [HttpPost]
-        [Route("api/transfer")]
-        public async Task<IActionResult> Create([Bind("from,to,content")] Transfer transfer)
-        {
-            _context.addMessage(transfer.to, transfer.from, transfer.content);
-            return Ok();
-        }
+        }        
     }
 }

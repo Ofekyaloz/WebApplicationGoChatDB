@@ -94,7 +94,7 @@ namespace WebApplicationGoChat.Controllers
         [Route("api/transfer")]
         public async Task<IActionResult> Create([Bind("from,to,content")] Transfer transfer)
         {
-            _context.addMessage(transfer.to, transfer.from, transfer.content);
+            _context.addMessage(transfer.to, transfer.from, transfer.content, false);
             return Ok();
         }
     }

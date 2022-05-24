@@ -13,5 +13,6 @@ namespace WebApplicationGoChat.Models
         public string Nickname { get; set; }
         public string Photo { get; set; }
         public List<Contact> Contacts { get; set; }
+        public string Connection { get; set; }
     }
 }

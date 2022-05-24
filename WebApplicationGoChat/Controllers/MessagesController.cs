@@ -46,20 +46,25 @@ namespace WebApplicationGoChat.Controllers
             return Ok(message);
         }
 
+        public class Content
+        {
+            public string content { get; set; }
+        }
+
         [HttpPost]
-        public async Task<IActionResult> Create(string id, [Bind("content")] string content)
+        public async Task<IActionResult> Create(string id, [Bind("content")] Content content)
         {
             var userId = HttpContext.User.Claims.First(i => i.Type == "UserId").Value;
-            _context.addMessage(userId, id, content);
+            _context.addMessage(userId, id, content.content, true);
             return Ok();
         }
 
         [HttpPut("{id2}")]
-        public async Task<IActionResult> Edit(string id, int id2, [Bind("content")] string content)
+        public async Task<IActionResult> Edit(string id, int id2, [Bind("content")] Content content)
         {
             var userId = HttpContext.User.Claims.First(i => i.Type == "UserId").Value;
 
-            _context.editMessage(userId, id, id2, content);
+            _context.editMessage(userId, id, id2, content.content);
             return Ok();
         }
 

@@ -85,6 +85,25 @@ namespace WebApplicationGoChat.Controllers
             }
         }
 
+        public class ConnectionId
+        {
+            public string connectionId { get; set; }
+        }
+
+        [HttpPost]
+        [Route("/api/Users/Connection")]
+        public async Task<IActionResult> Connection([Bind("connectionId")] ConnectionId connection)
+        {
+            var userId = HttpContext.User.Claims.First(i => i.Type == "UserId").Value;
+            if (userId == null)
+            {
+                return NotFound();
+            }
+            User user = _context.getUser(userId);
+            return Ok();
+        }
+
+
         private async void Logout()
         {
             await HttpContext.SignOutAsync();

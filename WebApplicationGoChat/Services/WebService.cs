@@ -143,7 +143,7 @@ namespace WebApplicationGoChat.Services
             return message;
         }
 
-        public void addMessage(string username, string contactname, string content)
+        public void addMessage(string username, string contactname, string content, bool sender)
         {
             Contact contact = getContact(username, contactname);
             if (contact == null)
@@ -151,8 +151,11 @@ namespace WebApplicationGoChat.Services
                 return;
             }
 
-            Message message = new Message() { sent = true, created = DateTime.Now.ToString(), content = content, id = contact.Messages.Max(m => m.id) + 1 };
+            Message message = new Message() { 
+                sent = sender, created = DateTime.Now.ToString(), content = content, id = contact.Messages.Count};
             contact.Messages.Add(message);
+            contact.last = message.content;
+            contact.lastdate = message.created;
         }
 
         public void editMessage(string username, string contactname, int id, string content)

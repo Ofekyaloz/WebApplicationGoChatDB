@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WebApplicationGoChat.Data;
+using WebApplicationGoChat.Hubs;
 using WebApplicationGoChat.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +32,8 @@ builder.Services.AddDbContext<WebApplicationGoChatContext>(options =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<IWebService, WebService>();
+
+builder.Services.AddSignalR();
 
 builder.Services.AddCors(options =>
 {
@@ -64,5 +67,10 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Users}/{action=Login}/{id?}");
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<myHub>("/MessageHub");
+});
 
 app.Run();

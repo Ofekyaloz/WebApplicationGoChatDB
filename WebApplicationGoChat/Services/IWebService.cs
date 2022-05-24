@@ -14,7 +14,7 @@ namespace WebApplicationGoChat.Services
         public void removeContact(string username, string contactname);
         public List<Message> getMessasges(string username, string contactname);
         public Message getMessasge(string username, string contactname, int id);
-        public void addMessage(string username, string contactname, string content);
+        public void addMessage(string username, string contactname, string content, bool sender);
         public void editMessage(string username, string contactname, int id, string content);
         public void removeMessage(string username, string contactname, int id);
     }
