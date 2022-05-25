@@ -40,7 +40,7 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
         policy =>
         {
-            policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            policy.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
         });
 });
 
@@ -70,7 +70,7 @@ app.MapControllerRoute(
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapHub<myHub>("/MessageHub");
+    endpoints.MapHub<MyHub>("/MyHub");
 });
 
 app.Run();

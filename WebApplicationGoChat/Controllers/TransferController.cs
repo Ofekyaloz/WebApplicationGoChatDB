@@ -10,9 +10,9 @@ namespace WebApplicationGoChat.Controllers
     public class TransferController : ControllerBase
     {
         private readonly IWebService _context;
-        private readonly IHubContext<myHub> _hub;
+        private readonly IHubContext<MyHub> _hub;
 
-        public TransferController(IWebService service, IHubContext<myHub> messageHub)
+        public TransferController(IWebService service, IHubContext<MyHub> messageHub)
         {
             _context = service;
             _hub = messageHub;
@@ -25,7 +25,14 @@ namespace WebApplicationGoChat.Controllers
         {
             _context.addMessage(transfer.to, transfer.from, transfer.content, false);
             User user = _context.getUser(transfer.to);
-           // _hub.Clients.Client(user.Connection).SendAsync("MessageReceived", "ho");
+            if (user == null)
+            {
+                return NotFound();
+            }
+            if (user.Connection != null)
+            {
+                _hub.Clients.Client(user.Connection).SendAsync("MessageReceived", "ho");
+            }
             return Ok();
         }
     }

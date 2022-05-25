@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using WebApplicationGoChat.Models;
@@ -91,15 +92,16 @@ namespace WebApplicationGoChat.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("/api/Users/Connection")]
-        public async Task<IActionResult> Connection([Bind("connectionId")] ConnectionId connection)
+        public IActionResult Connection([Bind("connectionId")] ConnectionId connection)
         {
             var userId = HttpContext.User.Claims.First(i => i.Type == "UserId").Value;
             if (userId == null)
             {
                 return NotFound();
             }
-            User user = _context.getUser(userId);
+            _context.getUser(userId).Connection = connection.connectionId;
             return Ok();
         }
 
