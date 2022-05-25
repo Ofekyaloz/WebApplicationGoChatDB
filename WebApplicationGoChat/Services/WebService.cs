@@ -11,10 +11,8 @@ namespace WebApplicationGoChat.Services
                 Email = "gili@gmail.com",
                 Nickname = "Gili",
                 Photo = "./Pictures/cat.jpg",
-                Contacts = new List<Contact>() { new Contact() { id = "ofekyaloz", name = "Ofek", server = "localhost:7265", last = "Hello!", lastdate = "1-1-2022",
-                Messages = new List<Message>() { new Message() { id = 1, content = "Hello!", created = "1-1-2022", sent = true } } },
-                    new Contact() { id = "leomessi", name = "Leo", server = "localhost:7265", last = "Hi!", lastdate = "15-1-2022",
-                Messages = new List<Message>() } }
+                Contacts = new List<Contact>() { new Contact() { id = "ofekyaloz", name = "Ofek", server = "localhost:7265", last = "Hello!", lastdate = "25/05/2022 18:39:30",
+                Messages = new List<Message>() { new Message() { id = 1, content = "Hello!", created = "25/05/2022 18:39:30", sent = true } } } }
             }, new User()
         {
             Username = "ofekyaloz",
@@ -22,8 +20,8 @@ namespace WebApplicationGoChat.Services
                 Email = "ofek@gmail.com",
                 Nickname = "Ofek",
                 Photo = "./Pictures/cat.jpg",
-                Contacts = new List<Contact>() { new Contact() { id = "giligutfeld", name = "Gili", server = "localhost:7265", last = "Hello!", lastdate = "1-1-2022",
-                Messages = new List<Message>() { new Message() { id = 1, content = "Hello!", created = "1-1-2022", sent = false } } } }
+                Contacts = new List<Contact>() { new Contact() { id = "giligutfeld", name = "Gili", server = "localhost:7265", last = "Hello!", lastdate = "25/05/2022 18:39:30",
+                Messages = new List<Message>() { new Message() { id = 1, content = "Hello!", created = "25/05/2022 18:39:30", sent = false } } } }
             }, new User() { Username = "noakirel", Password = "111111", Email = "noa@gmail.com", Nickname = "Noa", Photo = "./Pictures/cat.jpg", Contacts = new List<Contact>() },
         new User() { Username = "omeradam", Password = "shigramefoeret", Email = "omer@gmail.com", Nickname = "Omer", Photo = "./Pictures/cat.jpg", Contacts = new List<Contact>() },
         new User() { Username = "bibinetanyahu", Password = "bbbbbb", Email = "bibi@gmail.com", Nickname = "Bibi", Photo = "./Pictures/cat.jpg", Contacts = new List<Contact>() },

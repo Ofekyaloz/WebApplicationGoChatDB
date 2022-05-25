@@ -8,61 +8,61 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WebApplicationGoChat
 build_property.RootNamespace = WebApplicationGoChat
-build_property.ProjectDir = C:\Users\ofek1\source\repos\giligutfeld\WebApplicationGoChat\WebApplicationGoChat\
+build_property.ProjectDir = C:\Users\ofek1\Source\Repos\giligutfeld\WebApplicationGoChat\WebApplicationGoChat\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\ofek1\source\repos\giligutfeld\WebApplicationGoChat\WebApplicationGoChat
+build_property.MSBuildProjectDirectory = C:\Users\ofek1\Source\Repos\giligutfeld\WebApplicationGoChat\WebApplicationGoChat
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/ofek1/source/repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Messages/Create.cshtml]
+[C:/Users/ofek1/Source/Repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Messages/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVzc2FnZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ofek1/source/repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Messages/Delete.cshtml]
+[C:/Users/ofek1/Source/Repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Messages/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVzc2FnZXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ofek1/source/repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Messages/Details.cshtml]
+[C:/Users/ofek1/Source/Repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Messages/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVzc2FnZXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ofek1/source/repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Messages/Edit.cshtml]
+[C:/Users/ofek1/Source/Repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Messages/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVzc2FnZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ofek1/source/repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Messages/Index.cshtml]
+[C:/Users/ofek1/Source/Repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Messages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVzc2FnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ofek1/source/repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Shared/Error.cshtml]
+[C:/Users/ofek1/Source/Repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ofek1/source/repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/ofek1/Source/Repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ofek1/source/repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Users/AccessDenied.cshtml]
+[C:/Users/ofek1/Source/Repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Users/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcQWNjZXNzRGVuaWVkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ofek1/source/repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Users/Login.cshtml]
+[C:/Users/ofek1/Source/Repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Users/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ofek1/source/repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Users/Register.cshtml]
+[C:/Users/ofek1/Source/Repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Users/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ofek1/source/repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/_ViewImports.cshtml]
+[C:/Users/ofek1/Source/Repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ofek1/source/repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/_ViewStart.cshtml]
+[C:/Users/ofek1/Source/Repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ofek1/source/repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Shared/_Layout.cshtml]
+[C:/Users/ofek1/Source/Repos/giligutfeld/WebApplicationGoChat/WebApplicationGoChat/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-c4qk8rroeh
