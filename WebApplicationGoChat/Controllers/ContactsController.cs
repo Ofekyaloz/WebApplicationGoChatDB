@@ -22,7 +22,7 @@ namespace WebApplicationGoChat.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = HttpContext.User.Claims.First(i => i.Type == "UserId").Value;
-            var tmp = _context.getContacts(userId);
+            var tmp = await _context.getContacts(userId);
             return Ok(tmp);
         }
 
@@ -31,7 +31,7 @@ namespace WebApplicationGoChat.Controllers
         {
             var userId = HttpContext.User.Claims.First(i => i.Type == "UserId").Value;
 
-            Contact contact = _context.getContact(userId, id);
+            Contact contact = await _context.getContact(userId, id);
 
             if (contact == null)
             {

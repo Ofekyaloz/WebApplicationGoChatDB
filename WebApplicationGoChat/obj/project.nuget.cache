@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ff0xNe30BUbT2H9JXT9MpqS+ca8YK8rH7SuMVIs66OEOdpultHZt/mmapo0SXqFG9cO2+MMc3CTPFvC+riX82A==",
+  "dgSpecHash": "PPp+K6dWidGzkM/Rhcc29yccTLy1dNSg2rwoNE5kQPhjDpYuXEGd5HvmSs6YJJlJJl8mwESDYmAt27CHf5x5Dw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ofek1\\Source\\Repos\\giligutfeld\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj",
+  "projectFilePath": "C:\\Users\\ofek1\\RiderProjects\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ofek1\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ofek1\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",

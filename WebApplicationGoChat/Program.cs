@@ -10,6 +10,10 @@ using WebApplicationGoChat.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<WebApplicationGoChatContext>(
+    options => options.UseMySql("server=localhost;port=3306;user=root;password=12345678;database=Go-DB", MariaDbServerVersion.LatestSupportedServerVersion)
+);
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.RequireHttpsMetadata = false;
@@ -31,7 +35,7 @@ builder.Services.AddDbContext<WebApplicationGoChatContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSingleton<IWebService, WebService>();
+builder.Services.AddTransient<IWebService, WebService>();
 
 builder.Services.AddSignalR();
 
@@ -51,8 +55,6 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
-
-app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 

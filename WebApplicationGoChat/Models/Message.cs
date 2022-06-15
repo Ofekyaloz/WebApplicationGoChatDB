@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace WebApplicationGoChat.Models
 {
@@ -12,5 +13,8 @@ namespace WebApplicationGoChat.Models
         public string created { get; set; }
         [Required]
         public bool sent { get; set; }
+        
+        [JsonIgnore]
+        public Contact contact { get; set; }
     }
 }

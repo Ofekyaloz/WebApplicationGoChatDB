@@ -1,42 +1,25 @@
-﻿using WebApplicationGoChat.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using WebApplicationGoChat.Data;
+using WebApplicationGoChat.Models;
 
 namespace WebApplicationGoChat.Services
 {
     public class WebService : IWebService
     {
-        public static List<User> _users = new List<User>() { new User()
+        private readonly WebApplicationGoChatContext _context;
+        public WebService(WebApplicationGoChatContext context)
         {
-            Username = "giligutfeld",
-                Password = "123456",
-                Email = "gili@gmail.com",
-                Nickname = "Gili",
-                Photo = "./Pictures/cat.jpg",
-                Contacts = new List<Contact>() { new Contact() { id = "ofekyaloz", name = "Ofek", server = "localhost:7265", last = "Hello!", lastdate = "25/05/2022 18:39:30",
-                Messages = new List<Message>() { new Message() { id = 1, content = "Hello!", created = "25/05/2022 18:39:30", sent = true } } } }
-            }, new User()
-        {
-            Username = "ofekyaloz",
-                Password = "234567",
-                Email = "ofek@gmail.com",
-                Nickname = "Ofek",
-                Photo = "./Pictures/cat.jpg",
-                Contacts = new List<Contact>() { new Contact() { id = "giligutfeld", name = "Gili", server = "localhost:7265", last = "Hello!", lastdate = "25/05/2022 18:39:30",
-                Messages = new List<Message>() { new Message() { id = 1, content = "Hello!", created = "25/05/2022 18:39:30", sent = false } } } }
-            }, new User() { Username = "noakirel", Password = "111111", Email = "noa@gmail.com", Nickname = "Noa", Photo = "./Pictures/cat.jpg", Contacts = new List<Contact>() },
-        new User() { Username = "omeradam", Password = "shigramefoeret", Email = "omer@gmail.com", Nickname = "Omer", Photo = "./Pictures/cat.jpg", Contacts = new List<Contact>() },
-        new User() { Username = "bibinetanyahu", Password = "bbbbbb", Email = "bibi@gmail.com", Nickname = "Bibi", Photo = "./Pictures/cat.jpg", Contacts = new List<Contact>() },
-        new User() { Username = "edenhason", Password = "shemishuyaazoroti", Email = "eden@gmail.com", Nickname = "Eden", Photo = "./Pictures/cat.jpg", Contacts = new List<Contact>() },
-        new User() { Username = "leomessi", Password = "101010", Email = "leo@gmail.com", Nickname = "Messi", Photo = "./Pictures/cat.jpg", Contacts = new List<Contact>() }
-    };
-
-        public List<User> getUsers()
-        {
-            return _users;
+            _context = context;
         }
 
-        public User getUser(string username)
+        public async Task<List<User>> getUsers()
         {
-            User user = getUsers().Find(m => m.Username == username);
+            return await _context.User.ToListAsync();
+        }
+
+        public async Task<User> getUser(string username)
+        {
+            var user = await _context.User.FindAsync(username);
 
             if (user == null)
             {
@@ -46,140 +29,132 @@ namespace WebApplicationGoChat.Services
             return user;
         }
 
-        public void addUser(User user)
+        public async void addUser(User user)
         {
-            _users.Add(user);
+            _context.User.Add(user);
+            await _context.SaveChangesAsync();
         }
 
-        public List<Contact> getContacts(string username)
+        public async Task<ICollection<Contact>> getContacts(string username)
         {
-            if(getUser(username) == null)
+            User user = await getUser(username);
+            if(user == null)
             {
                 return null;
             }
-
-            return getUser(username).Contacts;
+            
+            await _context.Entry(user).Collection(e => e.Contacts).LoadAsync();
+            return user.Contacts;
         }
 
-        public Contact getContact(string username, string contactname)
+        public async Task<Contact> getContact(string username, string contactname)
         {
-            if(getContacts(username) == null)
-            {
-                return null;
-            }
-
-            Contact contact = getContacts(username).Find(m => m.id == contactname);
-            if (contact == null)
-            {
-                return null;
-            }
-
-            return contact;
+            var contacts = _context.Contact.Where(e => e.userid == username && e.id == contactname);
+            
+            return await contacts.FirstOrDefaultAsync();
         }
 
-        public void addContact(string username, AddContactFields contactFields)
+        public async void addContact(string username, AddContactFields contactFields)
         {
-            List<Contact> contacts = getUser(username).Contacts;
+            User user = await getUser(username);
+            List<User> users = await getUsers();
+            ICollection<Contact> contacts = user.Contacts;
 
-            if (contacts.Find(m => m.id == contactFields.id) != null)
+            if (contacts.FirstOrDefault(m => m.id == contactFields.id) != null)
                 return;
 
-            if (getUsers().Find(m => m.Username == contactFields.id) == null)
+            if (users.Find(m => m.Username == contactFields.id) == null)
                 return;
             
-            Contact contact = new Contact() { id = contactFields.id, name = contactFields.name, server = contactFields.server,
-                Messages = new List<Message>(), lastdate = null, last = null };
-
-            contacts.Add(contact);
+            user.Contacts.Add(new Contact { id = contactFields.id, name = contactFields.name, server = contactFields.server});
+            await _context.SaveChangesAsync();
         }
 
-        public void editContact(string username, string id, UpdateContactFields contactFields)
+        public async void editContact(string username, string id, UpdateContactFields contactFields)
         {
-            Contact x = getContact(username, id);
-            if (x == null)
+            Contact contact = await getContact(username, id);
+            if (contact == null)
             {
                 return;
             }
-            x.server = contactFields.server;
-            x.name = contactFields.name;
+            contact.server = contactFields.server;
+            contact.name = contactFields.name;
+            await _context.SaveChangesAsync();
         }
 
-        public void removeContact(string username, string contactname)
+        public async void removeContact(string username, string contactname)
         {
-            List<Contact> contacts = getContacts(username);
+            ICollection<Contact> contacts = getContacts(username).Result;
             if (contacts == null)
             {
                 return;
             }
-            contacts.Remove(getContact(username, contactname));
+            contacts.Remove(await getContact(username, contactname));
+            await _context.SaveChangesAsync();
         }
 
-        public List<Message> getMessasges(string username, string contactname)
+        public async Task<List<Message>> getMessasges(string username, string contactname)
         {
-            Contact contact = getContact(username, contactname);
+            Contact contact = await getContact(username, contactname);
+            await _context.Entry(contact).Collection(e => e.Messages).LoadAsync();
             if (contact == null)
             {
                 return null;
             }
 
-            return contact.Messages;
+            return contact.Messages.ToList();
         }
 
-        public Message getMessasge(string username, string contactname, int id)
+        public async Task<Message> getMessasge(string username, string contactname, int id)
         {
-            if (getMessasges(username, contactname) == null)
-            {
-                return null;
-            }
-
-            Message message = getMessasges(username, contactname).Find(m => m.id == id);
-            if (message == null)
-            {
-                return null;
-            }
-
+            Message message = (await getMessasges(username, contactname)).Find(m => m.id == id);
             return message;
         }
 
-        public void addMessage(string username, string contactname, string content, bool sender)
+        public async Task addMessage(string username, string contactname, string content, bool sender)
         {
-            Contact contact = getContact(username, contactname);
+            Contact contact = await getContact(username, contactname);
             if (contact == null)
             {
                 return;
             }
 
             Message message = new Message() { 
-                sent = sender, created = DateTime.Now.ToString(), content = content, id = contact.Messages.Count};
+                sent = sender, created = DateTime.Now.ToString(), content = content
+                
+            };
             contact.Messages.Add(message);
             contact.last = message.content;
             contact.lastdate = message.created;
+            await _context.SaveChangesAsync();
         }
 
-        public void editMessage(string username, string contactname, int id, string content)
+        public async void editMessage(string username, string contactname, int id, string content)
         {
-            Contact contact = getContact(username, contactname);
+            Contact contact = await getContact(username, contactname);
             if (contact == null)
             {
                 return;
             }
 
-            Message m = contact.Messages.Find(m => m.id == id);
+            Message m = contact.Messages.FirstOrDefault(m => m.id == id);
 
             if (m != null)
             {
                 m.content = content;
+                await _context.SaveChangesAsync();
             }
         }
-        public void removeMessage(string username, string contactname, int id)
+        public async void removeMessage(string username, string contactname, int id)
         {
-            List<Message> messages = getMessasges(username, contactname);
+            List<Message> messages = await getMessasges(username, contactname);
             if (messages == null)
             {
                 return;
             }
 
-            messages.Remove(getMessasge(username, contactname, id));
+            messages.Remove(await getMessasge(username, contactname, id));
+            await _context.SaveChangesAsync();
         }
     }
 }

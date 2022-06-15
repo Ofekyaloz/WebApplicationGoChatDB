@@ -30,7 +30,7 @@ namespace WebApplicationGoChat.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Details(string id)
         {
-            User user = _context.getUser(id);
+            User user = await _context.getUser(id);
 
             if (user == null)
             {
@@ -42,9 +42,9 @@ namespace WebApplicationGoChat.Controllers
 
         [HttpPost]
         [Route("/api/Users/Register")]
-        public async Task<IActionResult> Register([Bind("Username,Password,Nickname,Email,Photo,Contacts")] User user)
+        public async Task<IActionResult> Register([Bind("Username,Password,Nickname,Email,Photo,Contacts, Connection")] User user)
         {
-            var q = from u in _context.getUsers()
+            var q = from u in await _context.getUsers()
                     where u.Username == user.Username
                     select u;
 
@@ -52,14 +52,11 @@ namespace WebApplicationGoChat.Controllers
             {
                 return NotFound();
             }
-
-            else
-            {
-                var token = SignIn(user);
-                user.Contacts = new List<Contact>();
-                _context.addUser(user);
-                return Ok(new JwtSecurityTokenHandler().WriteToken(token));
-            }
+            
+            var token = SignIn(user);
+            _context.addUser(user);
+            return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+            
         }
         public class LoginFields
         {
@@ -71,7 +68,7 @@ namespace WebApplicationGoChat.Controllers
         [Route("/api/Users/Login")]
         public async Task<IActionResult> Login([Bind("username,password")] LoginFields loginFields)
         {
-            var q = from u in _context.getUsers()
+            var q = from u in await _context.getUsers()
                     where u.Username == loginFields.username && u.Password == loginFields.password
                     select u;
 
@@ -79,12 +76,10 @@ namespace WebApplicationGoChat.Controllers
             {
                 
                 var token = SignIn(q.First());
-                return Ok(new JwtSecurityTokenHandler().WriteToken(token) + " " +  q.First().Nickname + " " + q.First().Photo);
+                return Ok(new JwtSecurityTokenHandler().WriteToken(token));
             }
-            else
-            {
-                return NotFound();
-            }
+            return NotFound();
+            
         }
 
         public class ConnectionId
@@ -95,14 +90,14 @@ namespace WebApplicationGoChat.Controllers
         [HttpPost]
         [Authorize]
         [Route("/api/Users/Connection")]
-        public IActionResult Connection([Bind("connectionId")] ConnectionId connection)
+        public async Task<IActionResult> Connection([Bind("connectionId")] ConnectionId connection)
         {
             var userId = HttpContext.User.Claims.First(i => i.Type == "UserId").Value;
             if (userId == null)
             {
                 return NotFound();
             }
-            _context.getUser(userId).Connection = connection.connectionId;
+            (await _context.getUser(userId)).Connection = connection.connectionId;
             return Ok();
         }
 

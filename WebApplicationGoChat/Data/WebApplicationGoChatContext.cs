@@ -15,6 +15,11 @@ namespace WebApplicationGoChat.Data
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Contact>().HasKey(e => new {e.id, e.userid});
+        }
+        
         public DbSet<User> User { get; set; }
 
         public DbSet<Contact> Contact { get; set; }

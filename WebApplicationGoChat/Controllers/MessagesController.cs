@@ -23,7 +23,7 @@ namespace WebApplicationGoChat.Controllers
         public async Task<IActionResult> Index(string id)
         {
             var userId = HttpContext.User.Claims.First(i => i.Type == "UserId").Value;
-            List<Message> messages = _context.getMessasges(userId, id);
+            List<Message> messages = await _context.getMessasges(userId, id);
             if (messages == null)
             {
                 return NotFound();
@@ -36,7 +36,7 @@ namespace WebApplicationGoChat.Controllers
         public async Task<IActionResult> Details(string id, int id2)
         {
             var userId = HttpContext.User.Claims.First(i => i.Type == "UserId").Value;
-            Message message = _context.getMessasge(userId, id, id2);
+            Message message = await  _context.getMessasge(userId, id, id2);
 
             if (message == null)
             {
@@ -55,7 +55,7 @@ namespace WebApplicationGoChat.Controllers
         public async Task<IActionResult> Create(string id, [Bind("content")] Content content)
         {
             var userId = HttpContext.User.Claims.First(i => i.Type == "UserId").Value;
-            _context.addMessage(userId, id, content.content, true);
+            await _context.addMessage(userId, id, content.content, true);
             return Ok();
         }
 

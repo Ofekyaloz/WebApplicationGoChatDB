@@ -23,8 +23,8 @@ namespace WebApplicationGoChat.Controllers
         [Route("/api/transfer")]
         public async Task<IActionResult> Create([FromBody] Transfer transfer)
         {
-            _context.addMessage(transfer.to, transfer.from, transfer.content, false);
-            User user = _context.getUser(transfer.to);
+            await _context.addMessage(transfer.to, transfer.from, transfer.content, false);
+            User user = await _context.getUser(transfer.to);
             if (user == null)
             {
                 return NotFound();

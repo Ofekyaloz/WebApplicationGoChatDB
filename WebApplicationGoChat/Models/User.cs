@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using WebApplicationGoChat.Models;
 
 namespace WebApplicationGoChat.Models
@@ -8,11 +9,20 @@ namespace WebApplicationGoChat.Models
         [Key]
         public string Username { get; set; }
         [DataType(DataType.Password)]
+        
+        [JsonIgnore]
         public string Password { get; set; }
+        
         public string Email { get; set; }
         public string Nickname { get; set; }
         public string Photo { get; set; }
-        public List<Contact> Contacts { get; set; }
+        [JsonIgnore]
+        public ICollection<Contact> Contacts { get; set; }
         public string Connection { get; set; }
+        
+        public User()
+        {
+            Contacts = new List<Contact>();
+        }
     }
 }

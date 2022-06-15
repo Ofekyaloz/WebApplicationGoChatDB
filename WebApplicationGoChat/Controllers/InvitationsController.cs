@@ -25,7 +25,7 @@ namespace WebApplicationGoChat.Controllers
             {
                 id = invitation.from,
                 server = invitation.server,
-                name = _context.getUsers().Find(m => m.Username == invitation.from).Nickname
+                name = (await _context.getUsers()).Find(m => m.Username == invitation.from)?.Nickname
             });
             return Ok();
         }
