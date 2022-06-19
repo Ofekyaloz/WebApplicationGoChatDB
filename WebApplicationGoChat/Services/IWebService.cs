@@ -9,7 +9,7 @@ namespace WebApplicationGoChat.Services
         public void addUser(User user);
         public Task<ICollection<Contact>> getContacts(string username);
         public Task<Contact> getContact(string username, string contactname);
-        public void addContact(string username, AddContactFields contactFields);
+        public Task addContact(string username, AddContactFields contactFields);
         public void editContact(string username, string id, UpdateContactFields contactFields);
         public void removeContact(string username, string contactname);
         public Task<List<Message>> getMessasges(string username, string contactname);

@@ -45,7 +45,7 @@ namespace WebApplicationGoChat.Controllers
         public async Task<IActionResult> Create([Bind("id,name,server")] AddContactFields contactFields)
         {
             var userId = HttpContext.User.Claims.First(i => i.Type == "UserId").Value;
-            _context.addContact(userId, contactFields);
+            await _context.addContact(userId, contactFields);
             return Ok();
         }
 

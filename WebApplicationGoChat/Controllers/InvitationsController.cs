@@ -21,7 +21,7 @@ namespace WebApplicationGoChat.Controllers
         [Route("/api/invitations")]
         public async Task<IActionResult> Create([FromBody] Invitation invitation)
         {
-            _context.addContact(invitation.to, new AddContactFields()
+            await _context.addContact(invitation.to, new AddContactFields()
             {
                 id = invitation.from,
                 server = invitation.server,

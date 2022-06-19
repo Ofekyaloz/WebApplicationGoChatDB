@@ -54,19 +54,20 @@ namespace WebApplicationGoChat.Services
             return await contacts.FirstOrDefaultAsync();
         }
 
-        public async void addContact(string username, AddContactFields contactFields)
+        public async Task addContact(string username, AddContactFields contactFields)
         {
             User user = await getUser(username);
-            List<User> users = await getUsers();
+            //List<User> users = await getUsers();
             ICollection<Contact> contacts = user.Contacts;
 
             if (contacts.FirstOrDefault(m => m.id == contactFields.id) != null)
                 return;
 
-            if (users.Find(m => m.Username == contactFields.id) == null)
-                return;
-            
-            user.Contacts.Add(new Contact { id = contactFields.id, name = contactFields.name, server = contactFields.server});
+           // if (users.Find(m => m.Username == contactFields.id) == null)
+             //   return;
+             Contact contact = new Contact
+                 {id = contactFields.id, name = contactFields.name, server = contactFields.server};            
+            user.Contacts.Add(contact);
             await _context.SaveChangesAsync();
         }
 
