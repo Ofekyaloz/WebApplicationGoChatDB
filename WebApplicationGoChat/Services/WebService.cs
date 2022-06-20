@@ -29,7 +29,7 @@ namespace WebApplicationGoChat.Services
             return user;
         }
 
-        public async void addUser(User user)
+        public async Task addUser(User user)
         {
             _context.User.Add(user);
             await _context.SaveChangesAsync();

@@ -54,7 +54,7 @@ namespace WebApplicationGoChat.Controllers
             }
             
             var token = SignIn(user);
-            _context.addUser(user);
+            await _context.addUser(user);
             return Ok(new JwtSecurityTokenHandler().WriteToken(token));
             
         }
