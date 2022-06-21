@@ -6,7 +6,7 @@ namespace WebApplicationGoChat.Services
     {
         public Task<List<User>> getUsers();
         public Task<User> getUser(string username);
-        public void addUser(User user);
+        public Task addUser(User user);
         public Task<ICollection<Contact>> getContacts(string username);
         public Task<Contact> getContact(string username, string contactname);
         public Task addContact(string username, AddContactFields contactFields);
