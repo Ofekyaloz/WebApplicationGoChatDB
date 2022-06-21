@@ -97,6 +97,9 @@ namespace WebApplicationGoChat.Migrations
                     b.Property<string>("Photo")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Token")
+                        .HasColumnType("longtext");
+
                     b.HasKey("Username");
 
                     b.ToTable("User");

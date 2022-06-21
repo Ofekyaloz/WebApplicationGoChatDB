@@ -18,7 +18,8 @@ namespace WebApplicationGoChat.Models
         [JsonIgnore]
         public ICollection<Contact> Contacts { get; set; }
         public string Connection { get; set; }
-        
+
+        public string token { get; set; }
         public User()
         {
             Contacts = new List<Contact>();
