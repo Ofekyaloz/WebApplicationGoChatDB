@@ -9973,19 +9973,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\gilig\\.nuget\\packages\\": {}
+    "C:\\Users\\ofek1\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gilig\\RiderProjects\\WebApplicationGoChatDB\\WebApplicationGoChat\\WebApplicationGoChat.csproj",
+      "projectUniqueName": "C:\\Users\\ofek1\\RiderProjects\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj",
       "projectName": "WebApplicationGoChat",
-      "projectPath": "C:\\Users\\gilig\\RiderProjects\\WebApplicationGoChatDB\\WebApplicationGoChat\\WebApplicationGoChat.csproj",
-      "packagesPath": "C:\\Users\\gilig\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gilig\\RiderProjects\\WebApplicationGoChatDB\\WebApplicationGoChat\\obj\\",
+      "projectPath": "C:\\Users\\ofek1\\RiderProjects\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj",
+      "packagesPath": "C:\\Users\\ofek1\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ofek1\\RiderProjects\\WebApplicationGoChat\\WebApplicationGoChat\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\gilig\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ofek1\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10060,7 +10060,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
