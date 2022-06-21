@@ -75,7 +75,7 @@ namespace WebApplicationGoChat.Controllers
 
             var token = SignIn(user);
             if (loginFields.token != null)
-                user.FirebaseToken = loginFields.token;
+                user.Token = loginFields.token;
             return Ok(new JwtSecurityTokenHandler().WriteToken(token));
 
         }

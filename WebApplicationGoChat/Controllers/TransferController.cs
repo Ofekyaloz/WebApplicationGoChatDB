@@ -40,7 +40,7 @@ namespace WebApplicationGoChat.Controllers
             });
 
             FirebaseMessaging messaging = FirebaseMessaging.GetMessaging(app);
-            if (user?.FirebaseToken != null)
+            if (user?.Token != null)
             {
                 await messaging.SendAsync(new FirebaseAdmin.Messaging.Message
                 {
@@ -49,7 +49,7 @@ namespace WebApplicationGoChat.Controllers
                         Body = transfer.content,
                         Title = transfer.from
                     },
-                    Token = user.FirebaseToken
+                    Token = user.Token
                 });
             }
 

@@ -18,8 +18,8 @@ namespace WebApplicationGoChat.Models
         [JsonIgnore]
         public ICollection<Contact> Contacts { get; set; }
         public string Connection { get; set; }
-        public string FirebaseToken { get; set; }
-        
+        public string Token { get; set; }
+     
         public User()
         {
             Contacts = new List<Contact>();
