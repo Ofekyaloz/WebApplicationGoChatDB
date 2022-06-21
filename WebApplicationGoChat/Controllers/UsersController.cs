@@ -62,24 +62,22 @@ namespace WebApplicationGoChat.Controllers
         {
             public string username { get; set; }
             public string password { get; set; }
+            public string token { get; set; }
         }
 
         [HttpPost]
         [Route("/api/Users/Login")]
         public async Task<IActionResult> Login([Bind("username,password")] LoginFields loginFields)
         {
-            var q = from u in await _context.getUsers()
-                    where u.Username == loginFields.username && u.Password == loginFields.password
-                    select u;
+            User user = await _context.getUser(loginFields.username);
+            if (user == null || user.Password != loginFields.password)
+                return NotFound();
 
-            if (q.Count() > 0)
-            {
-                
-                var token = SignIn(q.First());
-                return Ok(new JwtSecurityTokenHandler().WriteToken(token));
-            }
-            return NotFound();
-            
+            var token = SignIn(user);
+            if (loginFields.token != null)
+                user.FirebaseToken = loginFields.token;
+            return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+
         }
 
         public class ConnectionId
