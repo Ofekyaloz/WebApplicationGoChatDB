@@ -32,13 +32,15 @@ namespace WebApplicationGoChat.Controllers
             {
                 return NotFound();
             }
+            
+            await _context.addMessage(transfer.to, transfer.from, transfer.content, false);
 
             var app = FirebaseApp.Create(new AppOptions()
             {
-                Credential = GoogleCredential.FromFile("WebApplicationGoChat\\go-chat-android-firebase-adminsdk-ta6uo-a3cefa54e7.json")
+                Credential = GoogleCredential.FromFile("..\\WebApplicationGoChat\\go-chat-android-firebase-adminsdk-ta6uo-a3cefa54e7.json")
                     .CreateScoped("https://www.googleapis.com/auth/firebase.messaging%22")
             });
-
+            
             FirebaseMessaging messaging = FirebaseMessaging.GetMessaging(app);
             if (user?.Token != null)
             {
@@ -57,8 +59,7 @@ namespace WebApplicationGoChat.Controllers
 
             if (contact == null)
                 return NotFound();
-
-            await _context.addMessage(transfer.to, transfer.from, transfer.content, false);
+            
 
             Uri uri = new Uri($"https://localhost:7225/api/Contacts/%7Bcontact.Id%7D/messages/%7Bmessage.Id%7D%22");
 

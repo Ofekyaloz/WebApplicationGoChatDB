@@ -17,5 +17,6 @@ namespace WebApplicationGoChat.Services
         public Task addMessage(string username, string contactname, string content, bool sender);
         public void editMessage(string username, string contactname, int id, string content);
         public void removeMessage(string username, string contactname, int id);
+        public Task setToken(User user, String token);
     }
 }

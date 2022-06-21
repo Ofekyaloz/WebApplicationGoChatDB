@@ -1342,3 +1342,11 @@ C:\Users\gilig\RiderProjects\WebApplicationGoChatDB\WebApplicationGoChat\obj\Deb
 C:\Users\gilig\RiderProjects\WebApplicationGoChatDB\WebApplicationGoChat\obj\Debug\net6.0\WebApplicationGoChat.pdb
 C:\Users\gilig\RiderProjects\WebApplicationGoChatDB\WebApplicationGoChat\obj\Debug\net6.0\WebApplicationGoChat.genruntimeconfig.cache
 C:\Users\gilig\RiderProjects\WebApplicationGoChatDB\WebApplicationGoChat\obj\Debug\net6.0\ref\WebApplicationGoChat.dll
+C:\Users\ofek1\RiderProjects\WebApplicationGoChat\WebApplicationGoChat\bin\Debug\net6.0\go-chat-android-firebase-adminsdk-ta6uo-a3cefa54e7.json
+C:\Users\ofek1\RiderProjects\WebApplicationGoChat\WebApplicationGoChat\bin\Debug\net6.0\FirebaseAdmin.dll
+C:\Users\ofek1\RiderProjects\WebApplicationGoChat\WebApplicationGoChat\bin\Debug\net6.0\Google.Api.Gax.dll
+C:\Users\ofek1\RiderProjects\WebApplicationGoChat\WebApplicationGoChat\bin\Debug\net6.0\Google.Api.Gax.Rest.dll
+C:\Users\ofek1\RiderProjects\WebApplicationGoChat\WebApplicationGoChat\bin\Debug\net6.0\Google.Apis.dll
+C:\Users\ofek1\RiderProjects\WebApplicationGoChat\WebApplicationGoChat\bin\Debug\net6.0\Google.Apis.Auth.PlatformServices.dll
+C:\Users\ofek1\RiderProjects\WebApplicationGoChat\WebApplicationGoChat\bin\Debug\net6.0\Google.Apis.Auth.dll
+C:\Users\ofek1\RiderProjects\WebApplicationGoChat\WebApplicationGoChat\bin\Debug\net6.0\Google.Apis.Core.dll

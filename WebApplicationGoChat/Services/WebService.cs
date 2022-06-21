@@ -35,6 +35,13 @@ namespace WebApplicationGoChat.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task setToken(User user, String token)
+        {
+            user.Token = token;
+            _context.User.Update(user);
+            await _context.SaveChangesAsync();
+        }
+        
         public async Task<ICollection<Contact>> getContacts(string username)
         {
             User user = await getUser(username);
