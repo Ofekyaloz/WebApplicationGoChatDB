@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ofek1\\RiderProjects\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj": {}
+    "C:\\Users\\gilig\\RiderProjects\\WebApplicationGoChatDB\\WebApplicationGoChat\\WebApplicationGoChat.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ofek1\\RiderProjects\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj": {
+    "C:\\Users\\gilig\\RiderProjects\\WebApplicationGoChatDB\\WebApplicationGoChat\\WebApplicationGoChat.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ofek1\\RiderProjects\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj",
+        "projectUniqueName": "C:\\Users\\gilig\\RiderProjects\\WebApplicationGoChatDB\\WebApplicationGoChat\\WebApplicationGoChat.csproj",
         "projectName": "WebApplicationGoChat",
-        "projectPath": "C:\\Users\\ofek1\\RiderProjects\\WebApplicationGoChat\\WebApplicationGoChat\\WebApplicationGoChat.csproj",
-        "packagesPath": "C:\\Users\\ofek1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ofek1\\RiderProjects\\WebApplicationGoChat\\WebApplicationGoChat\\obj\\",
+        "projectPath": "C:\\Users\\gilig\\RiderProjects\\WebApplicationGoChatDB\\WebApplicationGoChat\\WebApplicationGoChat.csproj",
+        "packagesPath": "C:\\Users\\gilig\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gilig\\RiderProjects\\WebApplicationGoChatDB\\WebApplicationGoChat\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ofek1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\gilig\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "FirebaseAdmin": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.5, )"
@@ -85,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

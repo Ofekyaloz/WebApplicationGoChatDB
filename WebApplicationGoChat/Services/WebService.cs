@@ -122,7 +122,6 @@ namespace WebApplicationGoChat.Services
 
             Message message = new Message() { 
                 sent = sender, created = DateTime.Now.ToString(), content = content
-                
             };
             contact.Messages.Add(message);
             contact.last = message.content;
