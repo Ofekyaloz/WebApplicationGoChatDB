@@ -67,7 +67,7 @@ namespace WebApplicationGoChat.Controllers
 
         [HttpPost]
         [Route("/api/Users/Login")]
-        public async Task<IActionResult> Login([Bind("username,password")] LoginFields loginFields)
+        public async Task<IActionResult> Login([Bind("username,password,token")] LoginFields loginFields)
         {
             User user = await _context.getUser(loginFields.username);
             if (user == null || user.Password != loginFields.password)

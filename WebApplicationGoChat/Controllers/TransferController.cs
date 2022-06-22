@@ -7,6 +7,7 @@ using WebApplicationGoChat.Hubs;
 using WebApplicationGoChat.Models;
 using WebApplicationGoChat.Services;
 using static WebApplicationGoChat.Controllers.ContactsController;
+using Message = FirebaseAdmin.Messaging.Message;
 
 namespace WebApplicationGoChat.Controllers
 {
@@ -32,41 +33,49 @@ namespace WebApplicationGoChat.Controllers
             {
                 return NotFound();
             }
-            
+
             await _context.addMessage(transfer.to, transfer.from, transfer.content, false);
-
-            var app = FirebaseApp.Create(new AppOptions()
-            {
-                Credential = GoogleCredential.FromFile("..\\WebApplicationGoChat\\go-chat-android-firebase-adminsdk-ta6uo-a3cefa54e7.json")
-                    .CreateScoped("https://www.googleapis.com/auth/firebase.messaging%22")
-            });
             
-            FirebaseMessaging messaging = FirebaseMessaging.GetMessaging(app);
-            if (user?.Token != null)
-            {
-                await messaging.SendAsync(new FirebaseAdmin.Messaging.Message
-                {
-                    Notification = new Notification()
-                    {
-                        Body = transfer.content,
-                        Title = transfer.from
-                    },
-                    Token = user.Token
-                });
-            }
-
             var contact = await _context.getContact(user.Username, transfer.from);
 
             if (contact == null)
                 return NotFound();
-            
-
-            Uri uri = new Uri($"https://localhost:7225/api/Contacts/%7Bcontact.Id%7D/messages/%7Bmessage.Id%7D%22");
 
             if (user.Connection != null)
             {
                 await _hub.Clients.Client(user.Connection).SendAsync("MessageReceived", "ho");
             }
+
+            if (FirebaseApp.DefaultInstance == null)
+            {
+                FirebaseApp.Create(new AppOptions()
+                {
+                    Credential =
+                        GoogleCredential.FromFile(
+                            "..\\WebApplicationGoChat\\go-chat-android-firebase-adminsdk-ta6uo-a3cefa54e7.json")
+                });
+            }
+
+            if (user?.Token != null)
+            {
+                var message = new FirebaseAdmin.Messaging.Message()
+                {
+                    Data = new Dictionary<string, string>()
+                    {
+                        {"myData", "1337"}, {"From", transfer.from}
+                    },
+                    Notification = new Notification()
+                    {
+                        Body = transfer.content,
+                        Title = "Message from: " + transfer.from
+                    },
+                    Token = user.Token
+                };
+
+                string response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
+                Console.WriteLine("Successfully " + response);
+            }
+            
             return Ok();
         }
     }

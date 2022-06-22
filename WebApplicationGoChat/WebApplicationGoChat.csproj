@@ -19,6 +19,9 @@
     <None Remove="Views\Chats\**" />
     <None Remove="Views\Contacts\**" />
     <None Remove="Views\Home\**" />
+    <Content Update="go-chat-android-firebase-adminsdk-ta6uo-a3cefa54e7.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
